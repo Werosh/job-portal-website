@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../context/AuthContext'; // Import the auth hook
+import { useAuth } from '../context/AuthContext';
 
 const SignUp = () => {
-  const { login } = useAuth(); // Use the auth context
+  const { register, error: authError } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -37,29 +37,20 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      // This would normally be an API call to your backend
-      // For demo purposes, we'll simulate a successful registration
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock user data that would come from your API
       const userData = {
-        id: '123',
-        name: formData.fullName,
+        fullName: formData.fullName,
         email: formData.email,
-        profileImage: null
+        password: formData.password
       };
       
-      // Mock token that would come from your API
-      const token = 'mock-jwt-token';
-      
-      // Use the login function from context
-      const success = login(userData, token);
+      // Use the register function from AuthContext
+      const success = await register(userData);
       
       if (success) {
         // Redirect to dashboard or home page
         navigate('/');
+      } else {
+        setError(authError || 'Registration failed. Please try again.');
       }
     } catch (err) {
       setError('Registration failed. Please try again.');

@@ -16,6 +16,7 @@ import ForgotPassword from '../LoginPages/ForgotPWD';
 import UserDashboard from '../dasboards/UserDash';
 import { AuthProvider } from '../context/AuthContext';
 import ApplyPage from '../dasboards/ApplyPage';
+import PostJob from '../dasboards/PostJob';
 
 
 const AppRouter = () => {
@@ -37,6 +38,7 @@ const AppRouter = () => {
         <Route path="/pwdrec" element={<ForgotPassword />} />
         <Route path="/userprofile" element={<UserDashboard />} />
         <Route path="/ApplytoJob" element={<ApplyPage />} />
+        <Route path="/postjob" element={<PostJob />} />
 
         
       </Routes>
